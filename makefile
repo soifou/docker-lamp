@@ -50,5 +50,19 @@ down:
 	- @docker-machine stop $(MACHINE_NAME) 2>/dev/null
 	@echo "$(GREEN)Stopping Docker machine:$(RESET) Done ✓"
 
+start:
+	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
+	- @docker-compose up -d 2>/dev/null
+	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
+
+stop:
+	@echo "$(GREEN)Stopping Docker containers...$(RESET)"
+	- @docker-compose stop 2>/dev/null
+	@echo "$(GREEN)Stopping Docker containers:$(RESET) Done ✓"
+	@echo ""
+	@echo "$(GREEN)Cleanup containers/network...$(RESET)"
+	- @docker-clean 1>/dev/null
+	@echo "$(GREEN)Cleanup containers/network:$(RESET) Done ✓"
+
 rename:
 	find nginx/conf.d -name "*.conf" -print | xargs sed -i 's/var\/www\/html/app/g'

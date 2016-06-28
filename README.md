@@ -29,9 +29,17 @@ $ cd path/to/docker/conf
 $ docker-compose up -d
 ```
 
-## Start/stop Docker, machine and containers for the LAMP stack
+## Start/stop the LAMP stack
+```sh
+$ make start
+...
+$ make stop
 ```
+
+## Start/stop Docker, machine and and the LAMP stack
+```sh
 $ make up
+...
 $ make down
 ```
 
