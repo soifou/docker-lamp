@@ -1,0 +1,32 @@
+####################################################
+# SYMFONY
+####################################################
+server {
+    server_name www.symfony.dev;
+    root /app/symfony/web;
+    error_log off;
+    access_log off;
+    include snippets/symfony.conf;
+}
+
+####################################################
+# LARAVEL
+####################################################
+server {
+    server_name www.laravel.dev;
+    root /app/laravel;
+    error_log off;
+    access_log off;
+    include snippets/laravel.conf;
+}
+
+####################################################
+# WORDPRESS
+####################################################
+server {
+    server_name wordpress.dev;
+    root /app/wordpress;
+    error_log off;
+    access_log off;
+    include snippets/wordpress.conf;
+}

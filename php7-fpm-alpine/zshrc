@@ -1,0 +1,13 @@
+LC_CTYPE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+
+source /root/.antigen/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen theme bureau
+antigen apply
+
+alias php="php7"
+cd /app

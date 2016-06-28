@@ -1,0 +1,3 @@
+_sandbox/*
+nginx-alpine/conf.d/*.conf
+!nginx-alpine/conf.d/*.dist

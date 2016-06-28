@@ -1,0 +1,49 @@
+version: '2'
+services:
+    # @see: https://docs.docker.com/compose/compose-file/
+
+    web:
+        image: nginx:1.11.1-alpine
+        container_name: docker_web
+        ports:
+            - 80:80
+        volumes:
+            - ~/Development:/app
+            - ./nginx-alpine/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx-alpine/fastcgi_params:/etc/nginx/fastcgi_params
+            - ./nginx-alpine/conf.d:/etc/nginx/conf.d
+            - ./nginx-alpine/snippets:/etc/nginx/snippets
+        links:
+            - php
+
+    php:
+        build:
+            context: php7-fpm-alpine
+        container_name: docker_php
+        volumes:
+            - ~/Development:/app
+            - ./php7-fpm-alpine/php.ini:/etc/php7/conf.d/50-setting.ini
+        ports:
+            - 9000:9000
+        links:
+            - db
+            - maildev
+        environment:
+            - SHELL=/bin/zsh
+            - TERM=xterm
+
+    db:
+        build:
+            context: mariadb-alpine
+        container_name: docker_db
+        volumes:
+            - /var/lib/boot2docker/mariadb:/data/db/mysql
+        environment:
+            - DB_USER=root
+            - DB_PASS=root
+
+    maildev:
+        image: djfarrelly/maildev
+        container_name: docker_mail
+        ports:
+            - 1080:80
