@@ -8,8 +8,12 @@ This is my development environment which run a Linux LAMP stack that work on mos
 - Container db: MariaDB (~170Mb)
 - Container mail: Maildev (~35Mb)
 
+## Prerequisites
+- [HomeBrew](http://brew.sh/)
+
 ## Requirements
 ```sh
+$ brew install caskroom/cask/brew-cask
 $ brew cask install virtualbox
 $ brew install docker docker-machine docker-compose docker-machine-nfs docker-clean
 $ source ~/.zshrc
@@ -21,10 +25,16 @@ TL;TR
 $ make init
 ```
 
-Create a boot2docker iso from Virtualbox, named for instance `dev-nfs`, change the share filesystem to NFS and launch all the linked containers to get the lamp stack running:
+The init process does the following stuff:
+- Create a boot2docker ISO from Virtualbox, named for instance `dev-nfs`
+- Change the shared filesystem to Network File System (NFS)
+- Create a custom briged network named `lamp-network` 
+- Launch the Compose file with the linked containers
+
 ```sh
 $ docker-machine create --driver virtualbox dev-nfs
 $ docker-machine-nfs dev-nfs
+$ docker network create --driver bridge lamp-network
 $ cd path/to/docker/conf
 $ docker-compose up -d
 ```
@@ -32,20 +42,23 @@ $ docker-compose up -d
 ## Start/stop the LAMP stack
 ```sh
 $ make start
-...
+... do stuff ...
 $ make stop
 ```
 
-## Start/stop Docker, machine and and the LAMP stack
+## Start/stop Docker, machine and the LAMP stack
 ```sh
 $ make up
-...
+... do stuff ...
 $ make down
 ```
 
-## NFS (Fix permission and get high speed sharing on OSX)
-The `docker-machine-nfs dev-nfs` should do the stuff.
-Check out `/etc/exports` file you should see a value like this:
+## About Network File System (NFS)
+VirtualBox use `vboxfs` which is incredibly slow, specially when you deal with some PHP frameworks (ie. Symfony, Laravel) that require constant read/write. It exists [some alternatives](https://github.com/brikis98/docker-osx-dev#alternatives) to speed up your environment.
+
+`docker-machine-nfs` fix my permissions problems and increase speed. So I stuck with this at the moment.
+
+Once the NFS is enabled on your docker machine, check out `/etc/exports` file you should see a value like this:
 ```
 /Users 192.168.99.100 -alldirs -mapall=501:20
 ```
@@ -82,11 +95,11 @@ Read further:
 - https://docs.docker.com/docker-hub/github/
 
 ## Cleanup
-To cleanup container/images with ease I recommand to install `docker-cleanup` tool: https://github.com/meltwater/docker-cleanup
+To cleanup containers/images/networks with ease I recommand to install [docker-cleanup](https://github.com/meltwater/docker-cleanup)
 ```sh
 $ brew install docker-cleanup
 ```
-Simply do a `docker-cleanup` and it will do most of the job.
+Simply do `docker-clean` regularly and it will do most of the job.
 
 ## Aliases and CLI
 
@@ -96,3 +109,5 @@ alias mysql="docker exec -i docker_db mysql"
 alias mysqldump="docker exec -i docker_db mysqldump"
 ```
 
+## Some other interesting links
+- http://mmenozzi.github.io/2016/01/22/php-web-development-with-docker/

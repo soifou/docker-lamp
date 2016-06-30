@@ -1,7 +1,7 @@
+# @see: https://docs.docker.com/compose/compose-file/
 version: '2'
-services:
-    # @see: https://docs.docker.com/compose/compose-file/
 
+services:
     web:
         image: nginx:1.11.1-alpine
         container_name: docker_web
@@ -15,7 +15,6 @@ services:
             - ./nginx-alpine/snippets:/etc/nginx/snippets
         links:
             - php
-
     php:
         build:
             context: php7-fpm-alpine
@@ -31,7 +30,6 @@ services:
         environment:
             - SHELL=/bin/zsh
             - TERM=xterm
-
     db:
         build:
             context: mariadb-alpine
@@ -41,9 +39,13 @@ services:
         environment:
             - DB_USER=root
             - DB_PASS=root
-
     maildev:
         image: djfarrelly/maildev
         container_name: docker_mail
         ports:
             - 1080:80
+
+networks:
+  default:
+    external:
+      name: lamp-network

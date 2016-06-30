@@ -1,8 +1,8 @@
 ##
 # Environment Variables
 ##
-NAMESPACE=soifou
 MACHINE_NAME=dev-nfs
+NETWORK_NAME=lamp-network
 
 ##
 # ANSI Escape Codes
@@ -24,26 +24,34 @@ init:
 	- @docker-machine-nfs $(MACHINE_NAME)
 	@echo "$(GREEN)Setup NFS filesystem:$(RESET) Done ✓"
 	@echo ""
+	@echo "$(GREEN)Creating a LAMP Docker network...$(RESET)"
+	- @docker network create --driver bridge $(NETWORK_NAME)
+	@echo "$(GREEN)Creating a LAMP Docker network:$(RESET) Done ✓"
+	@echo ""
 	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
 	- @docker-compose up -d 2>/dev/null
 	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
 
 up:
 	@echo "$(GREEN)Starting Docker machine <$(MACHINE_NAME)>...$(RESET)"
-	- @docker-machine start $(MACHINE_NAME) 2>/dev/null
+	- @docker-machine start $(MACHINE_NAME)
 	@echo "$(GREEN)Starting Docker machine <$(MACHINE_NAME)>:$(RESET) Done ✓"
 	@echo ""
+	@echo "$(GREEN)Creating a LAMP Docker network...$(RESET)"
+	- @docker network create --driver bridge $(NETWORK_NAME)
+	@echo "$(GREEN)Creating a LAMP Docker network:$(RESET) Done ✓"
+	@echo ""
 	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
-	- @docker-compose up -d 2>/dev/null
+	- @docker-compose up -d
 	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
 
 down:
 	@echo "$(GREEN)Stopping Docker containers...$(RESET)"
-	- @docker-compose stop 2>/dev/null
+	- @docker-compose stop
 	@echo "$(GREEN)Stopping Docker containers:$(RESET) Done ✓"
 	@echo ""
 	@echo "$(GREEN)Cleanup containers/network...$(RESET)"
-	- @docker-clean 1>/dev/null
+	- @docker-clean
 	@echo "$(GREEN)Cleanup containers/network:$(RESET) Done ✓"
 	@echo ""
 	@echo "$(GREEN)Stopping Docker machine...$(RESET)"
@@ -51,17 +59,21 @@ down:
 	@echo "$(GREEN)Stopping Docker machine:$(RESET) Done ✓"
 
 start:
+	@echo "$(GREEN)Creating a LAMP Docker network...$(RESET)"
+	- @docker network create --driver bridge $(NETWORK_NAME)
+	@echo "$(GREEN)Creating a LAMP Docker network:$(RESET) Done ✓"
+	@echo ""
 	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
-	- @docker-compose up -d 2>/dev/null
+	- @docker-compose up -d
 	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
 
 stop:
 	@echo "$(GREEN)Stopping Docker containers...$(RESET)"
-	- @docker-compose stop 2>/dev/null
+	- @docker-compose stop
 	@echo "$(GREEN)Stopping Docker containers:$(RESET) Done ✓"
 	@echo ""
 	@echo "$(GREEN)Cleanup containers/network...$(RESET)"
-	- @docker-clean 1>/dev/null
+	- @docker-clean
 	@echo "$(GREEN)Cleanup containers/network:$(RESET) Done ✓"
 
 rename:
