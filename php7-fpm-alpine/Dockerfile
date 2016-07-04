@@ -16,6 +16,7 @@ RUN apk upgrade -U && \
     php7 \
     zsh \
     git \
+    php7-bcmath \
     php7-dom \
     php7-ctype \
     php7-curl \
