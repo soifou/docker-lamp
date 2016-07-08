@@ -1,4 +1,4 @@
-# DOCKER LAMP STACK on OSX
+# LAMP stack with Docker Toolbox on OSX
 
 ## Overview
 This is my development environment which run a Linux LAMP stack that work on most of my PHP projects. All the Docker images are based on Alpine Linux to get something that remains light for disk space.

@@ -46,6 +46,6 @@ services:
             - 1080:80
 
 networks:
-  default:
-    external:
-      name: lamp-network
+    default:
+        external:
+            name: lamp-network
