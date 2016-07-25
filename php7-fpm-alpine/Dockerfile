@@ -12,10 +12,7 @@ RUN apk upgrade -U && \
     # $ /lib/ld-musl-x86_64.so.1 binary args
     # see https://github.com/gliderlabs/docker-alpine/issues/47
     ##############################################
-    make \
     php7 \
-    zsh \
-    git \
     php7-bcmath \
     php7-dom \
     php7-ctype \
@@ -37,9 +34,6 @@ RUN apk upgrade -U && \
     php7-xml \
     php7-zip \
     rm -fr /var/cache/apk/*
-
-RUN git clone https://github.com/zsh-users/antigen.git $HOME/.antigen
-COPY zshrc /root/.zshrc
 
 COPY php.ini /etc/php7/conf.d/50-setting.ini
 COPY php-fpm.conf /etc/php7/php-fpm.conf
