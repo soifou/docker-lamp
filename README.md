@@ -37,9 +37,9 @@ $ docker-compose -f /path/to/docker/docker-compose up -d
 
 ## What next?
 
-* [Post configuration](config.md)
-* [Network File System](nfs.md)
-* [Aliases and CLI](aliases.md)
+* [Post configuration](doc/config.md)
+* [Network File System](doc/nfs.md)
+* [Aliases and CLI](doc/aliases.md)
 
 
 ## Some other interesting links
