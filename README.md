@@ -8,39 +8,16 @@ This is my development environment which run a Linux LAMP stack that work on mos
 - Container db: MariaDB (~170Mb)
 - Container mail: Maildev (~35Mb)
 
-## Prerequisites
-- [HomeBrew](http://brew.sh/)
+## Installation
 
-## Requirements
-```sh
-$ brew install caskroom/cask/brew-cask
-$ brew cask install virtualbox
-$ brew install docker docker-machine docker-compose docker-machine-nfs docker-clean
-$ source ~/.zshrc
-```
-
-## Init
-
-The init process does the following stuff:
-- Create a boot2docker ISO from Virtualbox, named for instance `dev-nfs`
-- Change the shared filesystem to Network File System (NFS)
-- Create a custom briged network named `lamp-network` 
-- Launch the Compose file with the linked containers
-
-So in CLI you should type something like this:
-```sh
-$ docker-machine create --driver virtualbox dev-nfs
-$ docker-machine-nfs dev-nfs
-$ docker network create --driver bridge lamp-network
-$ docker-compose -f /path/to/docker/docker-compose up -d
-```
+* [on OSX](doc/install-osx.md)
 
 ## What next?
 
 * [Post configuration](doc/config.md)
-* [Network File System](doc/nfs.md)
+* [OSX Network File System](doc/nfs.md)
 * [Aliases and CLI](doc/aliases.md)
 
-
-## Some other interesting links
-- http://mmenozzi.github.io/2016/01/22/php-web-development-with-docker/
+## Read further
+* http://mmenozzi.github.io/2016/01/22/php-web-development-with-docker/
+* https://github.com/nerdpress-org/docker-sf3
