@@ -1,5 +1,11 @@
 ## Aliases and CLI
 
+### LAMP
+```
+alias lamp="docker-compose -f /path/to/docker-compose.yml"
+```
+You can then `lamp up -d` and `lamp stop` to start/stop the LAMP stack.
+
 ### MySQL
 To play with `mysql` from CLI you can add theses aliases:
 ```
@@ -22,7 +28,7 @@ function php() {
         -v "$PWD":$DOCKER_CURRENT_PATH \
         -w $DOCKER_CURRENT_PATH \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php7-cli-alpine:latest ${@:1}
+        soifou/php-alpine:cli-7.0 ${@:1}
 }
 ```
 For instance if we are working on `project` the folder path could be here:

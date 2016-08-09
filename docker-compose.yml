@@ -16,20 +16,17 @@ services:
         links:
             - php
     php:
-        build:
-            context: php7-fpm-alpine
+        # image: soifou/php-alpine:fpm-7.0
+        image: soifou/php-alpine:fpm-5.6
         container_name: docker_php
         volumes:
             - ~/Development:/app
-            - ./php7-fpm-alpine/php.ini:/etc/php7/conf.d/50-setting.ini
         ports:
             - 9000:9000
         links:
             - db
             - maildev
-        environment:
-            - SHELL=/bin/zsh
-            - TERM=xterm
+            - memcached
     db:
         build:
             context: mariadb-alpine
@@ -39,11 +36,19 @@ services:
         environment:
             - DB_USER=root
             - DB_PASS=root
+
     maildev:
         image: djfarrelly/maildev
         container_name: docker_mail
         ports:
             - 1080:80
+
+    memcached:
+        image: rane/alpine-memcached-redis
+        container_name: docker_memcached
+        ports:
+            - 11211:11211 # memcached
+            - 6379:6379 # redis
 
 networks:
     default:

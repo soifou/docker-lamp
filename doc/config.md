@@ -26,15 +26,21 @@ Obviously you can add other config file to add peculiar projects (see `_example.
 
 Since you tweak the conf, restart impacted containers:
 ```
-$ docker-compose -f /path/to/docker/docker-compose.yml restart php
-$ docker-compose -f /path/to/docker/docker-compose.yml restart web
+$ docker-compose -f /path/to/docker/docker-compose.yml restart php web
 ```
 
 ### Update your hosts
 
 Add an entry into `/etc/hosts` to point to your custom domain, ie:
 ```
+# OSX
 192.168.99.100 local.dev
+
+# Linux
+127.0.0.1 local.dev
 ```
 
 Go to your browser : http://local.dev
+
+## What's next?
+* [Aliases and CLI](doc/aliases.md)

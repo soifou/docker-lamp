@@ -25,6 +25,9 @@ $ docker network create --driver bridge lamp-network
 $ docker-compose -f /path/to/docker/docker-compose up -d
 ```
 
+## Why NFS ?
+* [OSX Network File System](doc/nfs.md)
+
 ## Tweak 
 Since you have to add docker vars each time you load a shell, add this to your bashrc/zshrc/whateverrc:
 
@@ -39,6 +42,9 @@ Then start a shell session Docker should return its vars:
 ```
 env | grep DOCKER
 ```
+
+## What's next?
+* [Post configuration](doc/config.md)
 
 ## Read further
 * https://www.docker.com/products/docker-toolbox

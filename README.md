@@ -11,11 +11,11 @@ This is my development environment which run a Linux LAMP stack that work on mos
 ## Installation
 
 * [on OSX](doc/install-osx.md)
+* [on Linux](doc/install-linux.md)
 
 ## What next?
 
 * [Post configuration](doc/config.md)
-* [OSX Network File System](doc/nfs.md)
 * [Aliases and CLI](doc/aliases.md)
 
 ## Read further
