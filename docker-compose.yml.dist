@@ -13,6 +13,7 @@ services:
             - ./nginx-alpine/fastcgi_params:/etc/nginx/fastcgi_params
             - ./nginx-alpine/conf.d:/etc/nginx/conf.d
             - ./nginx-alpine/snippets:/etc/nginx/snippets
+            - ./nginx-alpine/rewrites:/etc/nginx/rewrites
         links:
             - php
     php:

@@ -22,11 +22,12 @@ So in CLI you should type something like this:
 $ docker-machine create --driver virtualbox dev-nfs
 $ docker-machine-nfs dev-nfs
 $ docker network create --driver bridge lamp-network
+$ cp docker-compose.yml.dist docker-compose.yml
 $ docker-compose -f /path/to/docker/docker-compose up -d
 ```
 
 ## Why NFS ?
-* [OSX Network File System](doc/nfs.md)
+* [OSX Network File System](nfs.md)
 
 ## Tweak 
 Since you have to add docker vars each time you load a shell, add this to your bashrc/zshrc/whateverrc:
@@ -44,7 +45,7 @@ env | grep DOCKER
 ```
 
 ## What's next?
-* [Post configuration](doc/config.md)
+* [Post configuration](config.md)
 
 ## Read further
 * https://www.docker.com/products/docker-toolbox

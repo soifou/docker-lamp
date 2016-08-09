@@ -1,3 +1,6 @@
 _sandbox/*
 nginx-alpine/conf.d/*.conf
 !nginx-alpine/conf.d/*.dist
+nginx-alpine/rewrites/*
+!nginx-alpine/rewrites/.gitkeep
+docker-compose.yml

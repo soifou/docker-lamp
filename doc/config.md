@@ -43,4 +43,4 @@ Add an entry into `/etc/hosts` to point to your custom domain, ie:
 Go to your browser : http://local.dev
 
 ## What's next?
-* [Aliases and CLI](doc/aliases.md)
+* [Aliases and CLI](aliases.md)
