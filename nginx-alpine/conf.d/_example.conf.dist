@@ -14,7 +14,7 @@ server {
 ####################################################
 server {
     server_name www.laravel.dev;
-    root /app/laravel;
+    root /app/laravel/public;
     error_log off;
     access_log off;
     include snippets/laravel.conf;
