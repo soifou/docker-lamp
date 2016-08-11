@@ -4,3 +4,4 @@ nginx-alpine/conf.d/*.conf
 nginx-alpine/rewrites/*
 !nginx-alpine/rewrites/.gitkeep
 docker-compose.yml
+hosts
