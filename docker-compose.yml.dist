@@ -29,8 +29,7 @@ services:
             - maildev
             - memcached
     db:
-        build:
-            context: mariadb-alpine
+        image: soifou/mariadb-alpine
         container_name: docker_db
         volumes:
             - /var/lib/boot2docker/mariadb:/data/db/mysql
