@@ -3,10 +3,11 @@
 ## Overview
 This is my development environment which run a Linux LAMP stack that work on most of my PHP projects. All the Docker images are based on Alpine Linux to get something that remains light for disk space.
 
-- Container web: Nginx latest (~70Mb)
-- Container php: PHP7 with FPM and all common PHP extensions (~70Mb)
-- Container db: MariaDB (~170Mb)
+- Container web: Nginx latest (~55Mb)
+- Container php: PHP7 with FPM and all common PHP extensions (~65Mb)
+- Container db: MariaDB (~175Mb)
 - Container mail: Maildev (~35Mb)
+- Container cache: Memcached/Redis (~15Mb)
 
 ## Installation
 
