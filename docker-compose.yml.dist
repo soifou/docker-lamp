@@ -9,11 +9,11 @@ services:
             - 80:80
         volumes:
             - ~/Development:/app
-            - ./nginx-alpine/nginx.conf:/etc/nginx/nginx.conf
-            - ./nginx-alpine/fastcgi_params:/etc/nginx/fastcgi_params
-            - ./nginx-alpine/conf.d:/etc/nginx/conf.d
-            - ./nginx-alpine/snippets:/etc/nginx/snippets
-            - ./nginx-alpine/rewrites:/etc/nginx/rewrites
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/fastcgi_params:/etc/nginx/fastcgi_params
+            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx/snippets:/etc/nginx/snippets
+            - ./nginx/rewrites:/etc/nginx/rewrites
         links:
             - php
     php:

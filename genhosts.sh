@@ -6,7 +6,7 @@
 
 hostsfile=/etc/hosts
 customhosts=$(pwd)/hosts
-confdir=$(pwd)/nginx-alpine/conf.d/*.conf
+confdir=$(pwd)/nginx/conf.d/*.conf
 
 if [ -f $customhosts ]; then
     echo "Found generated hosts under $customhosts. Overwriting..."

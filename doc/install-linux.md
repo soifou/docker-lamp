@@ -10,7 +10,7 @@ $ docker network create --driver bridge lamp-network
 $ cp docker-compose.yml.dist docker-compose.yml
 ```
 
-You would change the database folder to point to another location than default one (/var/lib/boot2docker). 
+You would change the database folder to point to another location than default one (`/var/lib/boot2docker`). 
 
 Then:
 

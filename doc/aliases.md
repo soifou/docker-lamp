@@ -9,6 +9,7 @@ You can then `lamp up -d` and `lamp stop` to start/stop the LAMP stack.
 ### MySQL
 To play with `mysql` from CLI you can add theses aliases:
 ```
+alias mysql-cli="docker exec -it docker_db mysql -uroot -proot"
 alias mysql="docker exec -i docker_db mysql"
 alias mysqldump="docker exec -i docker_db mysqldump"
 ```

@@ -76,5 +76,8 @@ stop:
 	- @docker-clean
 	@echo "$(GREEN)Cleanup containers/network:$(RESET) Done ✓"
 
+hosts:
+	./genhosts.sh
+
 rename:
 	find nginx/conf.d -name "*.conf" -print | xargs sed -i 's/var\/www\/html/app/g'

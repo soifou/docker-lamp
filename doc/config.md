@@ -16,10 +16,10 @@ web:
 
 Enable a default conf to serve PHP files:
 ```
-$ cp nginx-alpine/conf.d/000-default.conf.dist nginx-alpine/conf.d/000-default.conf
+$ cp nginx/conf.d/000-default.conf.dist nginx/conf.d/000-default.conf
 ```
 
-Obviously you can add other config file to add peculiar projects (see `_example.conf.dist`).
+Obviously you can add other config file to add others projects (see `example.conf.dist`).
 
 
 ### Restart web/php container
