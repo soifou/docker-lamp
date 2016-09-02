@@ -1,7 +1,7 @@
 _sandbox/*
-nginx-alpine/conf.d/*.conf
-!nginx-alpine/conf.d/*.dist
-nginx-alpine/rewrites/*
-!nginx-alpine/rewrites/.gitkeep
+nginx/conf.d/*.conf
+!nginx/conf.d/*.dist
+nginx/rewrites/*
+!nginx/rewrites/.gitkeep
 docker-compose.yml
 hosts
