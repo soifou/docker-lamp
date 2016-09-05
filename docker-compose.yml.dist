@@ -16,6 +16,7 @@ services:
             - ./nginx/rewrites:/etc/nginx/rewrites
         links:
             - php
+            - maildev
     php:
         # image: soifou/php-alpine:fpm-7.0
         image: soifou/php-alpine:fpm-5.6
