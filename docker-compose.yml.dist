@@ -4,7 +4,7 @@ version: '2'
 services:
     web:
         image: nginx:1.11.3-alpine
-        container_name: docker_web
+        container_name: lamp_web
         ports:
             - 80:80
         volumes:
@@ -20,7 +20,7 @@ services:
     php:
         # image: soifou/php-alpine:fpm-7.0
         image: soifou/php-alpine:fpm-5.6
-        container_name: docker_php
+        container_name: lamp_php
         volumes:
             - ~/Development:/app
         ports:
@@ -31,7 +31,7 @@ services:
             - memcached
     db:
         image: soifou/mariadb-alpine
-        container_name: docker_db
+        container_name: lamp_db
         volumes:
             - /var/lib/boot2docker/mariadb:/data/db/mysql
         environment:
@@ -40,13 +40,13 @@ services:
 
     maildev:
         image: djfarrelly/maildev
-        container_name: docker_mail
+        container_name: lamp_mail
         ports:
             - 1080:80
 
     memcached:
         image: rane/alpine-memcached-redis
-        container_name: docker_memcached
+        container_name: lamp_memcached
         ports:
             - 11211:11211 # memcached
             - 6379:6379 # redis
