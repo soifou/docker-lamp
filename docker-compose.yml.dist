@@ -3,7 +3,7 @@ version: '2'
 
 services:
     web:
-        image: nginx:1.11.3-alpine
+        image: nginx:1.11-alpine
         container_name: lamp_web
         ports:
             - 80:80
