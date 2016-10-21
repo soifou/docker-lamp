@@ -1,17 +1,28 @@
 ## Aliases and CLI
 
 ### LAMP
+Some useful aliases to manage your containers.
 ```
 alias lamp="docker-compose -f /path/to/docker-compose.yml"
+alias lamp5="lamp -f /path/to/docker-compose.php5.yml"
+# switch to php version
+alias lamp-switch="lamp5 stop php && lamp up -d php"
+alias lamp-switch5="lamp stop php && lamp5 up -d php"
 ```
-You can then `lamp up -d` and `lamp stop` to start/stop the LAMP stack.
+
+Worflow example:
+* `lamp up -d`: Create and start containers
+* `lamp-switch5`: Use PHP5 container intead of default PHP7 container
+* `lamp-switch`: Go back to your default PHP7 container
+* `lamp stop`: Stop your containers
+* `lamp rm -f`: Remove your container
 
 ### MySQL
 To play with `mysql` from CLI you can add theses aliases:
 ```
-alias mysql-cli="docker exec -it docker_db mysql -uroot -proot"
-alias mysql="docker exec -i docker_db mysql"
-alias mysqldump="docker exec -i docker_db mysqldump"
+alias mysql-cli="docker exec -it lamp_db mysql -uroot -proot"
+alias mysql="docker exec -i lamp_db mysql"
+alias mysqldump="docker exec -i lamp_db mysqldump"
 ```
 
 ### PHP

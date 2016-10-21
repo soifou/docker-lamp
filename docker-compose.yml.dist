@@ -18,8 +18,7 @@ services:
             - php
             - maildev
     php:
-        # image: soifou/php-alpine:fpm-7.0
-        image: soifou/php-alpine:fpm-5.6
+        image: soifou/php-alpine:fpm-7.0
         container_name: lamp_php
         volumes:
             - ~/Development:/app
