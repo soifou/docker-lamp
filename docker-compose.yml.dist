@@ -1,6 +1,4 @@
-# @see: https://docs.docker.com/compose/compose-file/
 version: '2'
-
 services:
     web:
         image: nginx:1.11-alpine
@@ -14,9 +12,7 @@ services:
             - ./nginx/conf.d:/etc/nginx/conf.d
             - ./nginx/snippets:/etc/nginx/snippets
             - ./nginx/rewrites:/etc/nginx/rewrites
-        links:
-            - php
-            - maildev
+
     php:
         image: soifou/php-alpine:fpm-7.0
         container_name: lamp_php
@@ -24,10 +20,7 @@ services:
             - ~/Development:/app
         ports:
             - 9000:9000
-        links:
-            - db
-            - maildev
-            - memcached
+
     db:
         image: soifou/mariadb-alpine
         container_name: lamp_db
@@ -43,12 +36,9 @@ services:
         ports:
             - 1080:80
 
-    memcached:
-        image: rane/alpine-memcached-redis
-        container_name: lamp_memcached
-        ports:
-            - 11211:11211 # memcached
-            - 6379:6379 # redis
+    redis:
+        image: redis:alpine
+        container_name: lamp_redis
 
 networks:
     default:
