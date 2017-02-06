@@ -4,16 +4,19 @@
 Some useful aliases to manage your containers.
 ```
 alias lamp="docker-compose -f /path/to/docker-compose.yml"
-alias lamp5="lamp -f /path/to/docker-compose.php5.yml"
+alias lamp5.6="lamp -f /path/to/docker-compose.php5.6.yml"
+alias lamp7.0="lamp -f /path/to/docker-compose.php7.0.yml"
 # switch to php version
-alias lamp-switch="lamp5 stop php && lamp up -d php"
-alias lamp-switch5="lamp stop php && lamp5 up -d php"
+alias lamp-switch="lamp5.6 stop php && lamp7.0 stop php && lamp up -d php"
+alias lamp-switch5.6="lamp stop php && lamp7.0 stop php && lamp5.6 up -d php"
+alias lamp-switch7.0="lamp stop php && lamp5.6 stop php && lamp7.0 up -d php"
 ```
 
 Worflow example:
 * `lamp up -d`: Create and start containers
-* `lamp-switch5`: Use PHP5 container intead of default PHP7 container
-* `lamp-switch`: Go back to your default PHP7 container
+* `lamp-switch5.6`: Use PHP 5.6 container intead of default PHP 7.1 container
+* `lamp-switch7.0`: Use PHP 7.0 container intead of default PHP 7.1 container
+* `lamp-switch`: Switch back to your default PHP 7.1 container
 * `lamp stop`: Stop your containers
 * `lamp rm -f`: Remove your container
 

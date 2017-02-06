@@ -14,10 +14,11 @@ services:
             - ./nginx/rewrites:/etc/nginx/rewrites
 
     php:
-        image: soifou/php-alpine:fpm-7.0
+        image: soifou/php-alpine:fpm-7.1
         container_name: lamp_php
         volumes:
             - ~/Development:/app
+            - ./php/php.ini:/usr/local/etc/php/conf.d/50-settings.ini
         ports:
             - 9000:9000
 

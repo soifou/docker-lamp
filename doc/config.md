@@ -22,6 +22,10 @@ $ cp nginx/conf.d/000-default.conf.dist nginx/conf.d/000-default.conf
 Obviously you can add other config file to add others projects (see `example.conf.dist`).
 
 
+### PHP conf
+
+Set your custom php.ini variables here `php/php.ini`.
+
 ### Restart web/php container
 
 Since you tweak the conf, restart impacted containers:
