@@ -1,6 +1,6 @@
 ## Aliases and CLI
 
-### LAMP
+### LEMP
 Some useful aliases to manage your containers.
 ```
 alias lamp="docker-compose -f /path/to/docker-compose.yml"

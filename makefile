@@ -24,26 +24,26 @@ init:
 	- @docker-machine-nfs $(MACHINE_NAME)
 	@echo "$(GREEN)Setup NFS filesystem:$(RESET) Done ✓"
 	@echo ""
-	@echo "$(GREEN)Creating a LAMP Docker network...$(RESET)"
+	@echo "$(GREEN)Creating a LEMP Docker network...$(RESET)"
 	- @docker network create --driver bridge $(NETWORK_NAME)
-	@echo "$(GREEN)Creating a LAMP Docker network:$(RESET) Done ✓"
+	@echo "$(GREEN)Creating a LEMP Docker network:$(RESET) Done ✓"
 	@echo ""
-	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
+	@echo "$(GREEN)Starting LEMP stack containers...$(RESET)"
 	- @docker-compose up -d 2>/dev/null
-	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
+	@echo "$(GREEN)Starting LEMP stack containers:$(RESET) Done ✓"
 
 up:
 	@echo "$(GREEN)Starting Docker machine <$(MACHINE_NAME)>...$(RESET)"
 	- @docker-machine start $(MACHINE_NAME)
 	@echo "$(GREEN)Starting Docker machine <$(MACHINE_NAME)>:$(RESET) Done ✓"
 	@echo ""
-	@echo "$(GREEN)Creating a LAMP Docker network...$(RESET)"
+	@echo "$(GREEN)Creating a LEMP Docker network...$(RESET)"
 	- @docker network create --driver bridge $(NETWORK_NAME)
-	@echo "$(GREEN)Creating a LAMP Docker network:$(RESET) Done ✓"
+	@echo "$(GREEN)Creating a LEMP Docker network:$(RESET) Done ✓"
 	@echo ""
-	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
+	@echo "$(GREEN)Starting LEMP stack containers...$(RESET)"
 	- @docker-compose up -d
-	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
+	@echo "$(GREEN)Starting LEMP stack containers:$(RESET) Done ✓"
 
 down:
 	@echo "$(GREEN)Stopping Docker containers...$(RESET)"
@@ -59,13 +59,13 @@ down:
 	@echo "$(GREEN)Stopping Docker machine:$(RESET) Done ✓"
 
 start:
-	@echo "$(GREEN)Creating a LAMP Docker network...$(RESET)"
+	@echo "$(GREEN)Creating a LEMP Docker network...$(RESET)"
 	- @docker network create --driver bridge $(NETWORK_NAME)
-	@echo "$(GREEN)Creating a LAMP Docker network:$(RESET) Done ✓"
+	@echo "$(GREEN)Creating a LEMP Docker network:$(RESET) Done ✓"
 	@echo ""
-	@echo "$(GREEN)Starting LAMP stack containers...$(RESET)"
+	@echo "$(GREEN)Starting LEMP stack containers...$(RESET)"
 	- @docker-compose up -d
-	@echo "$(GREEN)Starting LAMP stack containers:$(RESET) Done ✓"
+	@echo "$(GREEN)Starting LEMP stack containers:$(RESET) Done ✓"
 
 stop:
 	@echo "$(GREEN)Stopping Docker containers...$(RESET)"

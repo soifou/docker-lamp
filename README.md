@@ -1,7 +1,7 @@
-# LAMP stack with Docker Toolbox
+# LEMP stack with Docker Toolbox
 
 ## Overview
-This is my development environment which run a Linux LAMP stack that work on most of my PHP projects. All the Docker images are based on Alpine Linux to get something that remains light for disk space.
+This is my development environment which run a Linux [LEMP stack](https://lemp.io/) that work on most of my PHP projects. All the Docker images are based on Alpine Linux to get something that remains light for disk space.
 
 - Container web: Nginx latest (~55Mb)
 - Container php: PHP7 with FPM and all common PHP extensions (~65Mb)
