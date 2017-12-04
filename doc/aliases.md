@@ -3,20 +3,23 @@
 ### LEMP
 Some useful aliases to manage your containers.
 ```
-alias lamp="docker-compose -f /path/to/docker-compose.yml"
-alias lamp5.6="lamp -f /path/to/docker-compose.php5.6.yml"
-alias lamp7.0="lamp -f /path/to/docker-compose.php7.0.yml"
-# switch to php version
-alias lamp-switch="lamp5.6 stop php && lamp7.0 stop php && lamp up -d php"
-alias lamp-switch5.6="lamp stop php && lamp7.0 stop php && lamp5.6 up -d php"
-alias lamp-switch7.0="lamp stop php && lamp5.6 stop php && lamp7.0 up -d php"
+alias lamp="docker-compose -f /path/to/lamp/docker-compose.yml"
+alias lamp5.3="lamp -f /path/to/lamp/docker-compose.php5.3.yml"
+alias lamp5.6="lamp -f /path/to/lamp/docker-compose.php5.6.yml"
+alias lamp7.0="lamp -f /path/to/lamp/docker-compose.php7.0.yml"
+alias lamp7.1="lamp -f /path/to/lamp/docker-compose.php7.1.yml"
+# switch to some php-fpm versions
+alias lamp-switch="lamp stop php && lamp rm -f php && lamp up -d php"
+alias lamp-switch7.1="lamp stop php && lamp rm -f php && lamp7.1 up -d php"
+alias lamp-switch7.0="lamp stop php && lamp rm -f php && lamp7.0 up -d php"
+alias lamp-switch5.6="lamp stop php && lamp rm -f php && lamp5.6 up -d php"
+alias lamp-switch5.3="lamp stop php && lamp rm -f php && lamp5.3 up -d php"
 ```
 
 Worflow example:
 * `lamp up -d`: Create and start containers
-* `lamp-switch5.6`: Use PHP 5.6 container intead of default PHP 7.1 container
-* `lamp-switch7.0`: Use PHP 7.0 container intead of default PHP 7.1 container
-* `lamp-switch`: Switch back to your default PHP 7.1 container
+* `lamp-switch5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
+* `lamp-switch`: Switch back to your latest PHP-FPM container
 * `lamp stop`: Stop your containers
 * `lamp rm -f`: Remove your container
 
@@ -39,7 +42,6 @@ function php() {
     # we should stick to the php container working path (/app)
     DOCKER_CURRENT_PATH="/app$RELATIVE_PATH"
     docker run -it --rm \
-        --name php7-cli-running-script \
         -v "$PWD":$DOCKER_CURRENT_PATH \
         -w $DOCKER_CURRENT_PATH \
         --net=$DOCKER_NETWORK_NAME \

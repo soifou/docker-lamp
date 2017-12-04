@@ -14,7 +14,7 @@ services:
             - ./nginx/rewrites:/etc/nginx/rewrites
 
     php:
-        image: soifou/php-alpine:fpm-7.1
+        image: soifou/php-alpine:fpm-7.2
         container_name: lamp_php
         volumes:
             - ~/Development:/app
