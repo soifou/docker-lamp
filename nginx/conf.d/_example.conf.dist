@@ -1,5 +1,5 @@
 ####################################################
-# SYMFONY
+# SYMFONY 2/3
 ####################################################
 server {
     server_name www.symfony.dev;
@@ -7,6 +7,17 @@ server {
     error_log off;
     access_log off;
     include snippets/symfony.conf;
+}
+
+####################################################
+# SYMFONY 4
+####################################################
+server {
+    server_name www.sf4.dev;
+    root /app/sf4/public;
+    error_log off;
+    access_log off;
+    include snippets/basic-php.conf;
 }
 
 ####################################################
@@ -29,4 +40,65 @@ server {
     error_log off;
     access_log off;
     include snippets/wordpress.conf;
+}
+
+####################################################
+# MAGENTO
+####################################################
+server {
+    server_name magento.dev;
+    root /app/magento;
+
+    access_log off;
+    error_log off;
+
+    include snippets/magento.conf;
+
+    location ~ .php$ {
+        if (!-e $request_filename) {
+            rewrite / /index.php last;
+        }
+        expires off; ## Do not cache dynamic content
+        fastcgi_pass   php:9000;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  MAGE_RUN_CODE xxxx;
+        fastcgi_param  MAGE_RUN_TYPE yyyy;
+        fastcgi_param  MAGE_IS_DEVELOPER_MODE true;
+        include        fastcgi_params;
+    }
+
+    # we don't want all the medias stored in our computer!
+    location /media {
+        return 302 http://www.website.com$request_uri;
+    }
+}
+
+####################################################
+# PRESTASHOP 1.6
+####################################################
+server {
+    server_name prestashop.dev;
+    root /app/prestashop;
+    access_log off;
+    include snippets/prestashop.conf;
+}
+
+####################################################
+# CODEIGNITER
+####################################################
+server {
+    server_name codeigniter.dev;
+    root /app/codeigniter;
+    index index.php;
+    include snippets/basic-php.conf;
+}
+
+####################################################
+# ZEND
+####################################################
+server {
+    server_name zend.dev;
+    root /app/zend/public;
+    index index.php;
+    include snippets/basic-php.conf;
 }
