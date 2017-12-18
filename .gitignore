@@ -1,5 +1,5 @@
 _sandbox/*
-nginx/conf.d/*.conf
+nginx/conf.d/*
 !nginx/conf.d/*.dist
 nginx/rewrites/*
 !nginx/rewrites/.gitkeep
