@@ -3,23 +3,25 @@
 ### LEMP
 Some useful aliases to manage your containers.
 ```
-alias lamp="docker-compose -f /path/to/lamp/docker-compose.yml"
-alias lamp5.3="lamp -f /path/to/lamp/docker-compose.php5.3.yml"
-alias lamp5.6="lamp -f /path/to/lamp/docker-compose.php5.6.yml"
-alias lamp7.0="lamp -f /path/to/lamp/docker-compose.php7.0.yml"
-alias lamp7.1="lamp -f /path/to/lamp/docker-compose.php7.1.yml"
-# switch to some php-fpm versions
-alias lamp-switch="lamp stop php && lamp rm -f php && lamp up -d php"
-alias lamp-switch7.1="lamp stop php && lamp rm -f php && lamp7.1 up -d php"
-alias lamp-switch7.0="lamp stop php && lamp rm -f php && lamp7.0 up -d php"
-alias lamp-switch5.6="lamp stop php && lamp rm -f php && lamp5.6 up -d php"
-alias lamp-switch5.3="lamp stop php && lamp rm -f php && lamp5.3 up -d php"
+LAMP_REPO="/path/to/lamp"
+alias lamp="docker-compose -f $LAMP_REPO/docker-compose.yml"
+
+# switch to different php-fpm versions
+alias lamp-fpm="lamp stop php && lamp rm -f php && lamp up -d php"
+alias lamp-fpm7.1="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php7.1.yml up -d php"
+alias lamp-fpm7.0="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php7.0.yml up -d php"
+alias lamp-fpm5.6="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php5.6.yml up -d php"
+alias lamp-fpm5.3="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php5.3.yml up -d php"
+# switch to different mariadb versions
+alias lamp-mariadb="lamp stop db && lamp rm -f db && lamp up -d db"
+alias lamp-mariadb10.1="lamp stop db && lamp rm -f db && lamp -f $LAMP_REPO/docker-compose.mariadb10.1.yml up -d db"
 ```
 
 Worflow example:
 * `lamp up -d`: Create and start containers
-* `lamp-switch5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
-* `lamp-switch`: Switch back to your latest PHP-FPM container
+* `lamp-fpm5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
+* `lamp-fpm`: Switch back to your latest PHP-FPM container
+* `lamp-mariadb10.1`: Use MariaDB 10.1 instead
 * `lamp stop`: Stop your containers
 * `lamp rm -f`: Remove your container
 
@@ -81,7 +83,7 @@ function wp() {
 }
 ```
 
-### n98-magerun (1.X)
+### n98-magerun (1.x)
 ```
 function n98() {
     docker run -it --rm \

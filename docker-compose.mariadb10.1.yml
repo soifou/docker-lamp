@@ -1,0 +1,13 @@
+version: '2'
+services:
+    db:
+        image: soifou/mariadb-alpine
+        # to persist databases, uncomment below
+        # volumes:
+            # for macOS
+            # - /var/lib/boot2docker/mariadb:/data/db/mysql
+            # for linux
+            # - /wherever/u/want:/data/db/mysql
+        environment:
+            DB_USER: root
+            DB_PASS: root

@@ -23,13 +23,17 @@ services:
             - 9000:9000
 
     db:
-        image: soifou/mariadb-alpine
+        image: wodby/mariadb:10.2
         container_name: lamp_db
-        volumes:
-            - /var/lib/boot2docker/mariadb:/data/db/mysql
+        # to persist databases, uncomment below
+        # volumes:
+            # for macOS
+            # - /var/lib/boot2docker/mariadb:/var/lib/mysql
+            # for linux
+            # - /wherever/u/want:/var/lib/mysql
         environment:
-            - DB_USER=root
-            - DB_PASS=root
+            MYSQL_USER: root
+            MYSQL_ROOT_PASSWORD: root
 
     maildev:
         image: djfarrelly/maildev

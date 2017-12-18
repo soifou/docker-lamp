@@ -3,11 +3,11 @@
 ## Overview
 This is my development environment which run a Linux [LEMP stack](https://lemp.io/) that work on most of my PHP projects. All the Docker images are based on Alpine Linux to get something that remains light for disk space.
 
-- Container web: Nginx latest (~55Mb)
-- Container php: PHP7 with FPM and all common PHP extensions (~65Mb)
-- Container db: MariaDB (~175Mb)
-- Container mail: Maildev (~35Mb)
-- Container cache: Memcached/Redis (~15Mb)
+- Container web: Nginx
+- Container php: PHP5.x/7.x with FPM and all common PHP extensions
+- Container db: MariaDB 10.x
+- Container mail: Maildev
+- Container cache: Redis
 
 ## Installation
 
