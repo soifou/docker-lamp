@@ -3,18 +3,18 @@
 ### LEMP
 Some useful aliases to manage your containers.
 ```
-LAMP_REPO="/path/to/lamp"
-alias lamp="docker-compose -f $LAMP_REPO/docker-compose.yml"
+LEMP_REPO="/path/to/lamp"
+alias lamp="docker-compose -f $LEMP_REPO/docker-compose.yml"
 
 # switch to different php-fpm versions
 alias lamp-fpm="lamp stop php && lamp rm -f php && lamp up -d php"
-alias lamp-fpm7.1="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php7.1.yml up -d php"
-alias lamp-fpm7.0="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php7.0.yml up -d php"
-alias lamp-fpm5.6="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php5.6.yml up -d php"
-alias lamp-fpm5.3="lamp stop php && lamp rm -f php && lamp -f $LAMP_REPO/docker-compose.php5.3.yml up -d php"
+alias lamp-fpm7.1="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.1.yml up -d php"
+alias lamp-fpm7.0="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.0.yml up -d php"
+alias lamp-fpm5.6="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php5.6.yml up -d php"
+alias lamp-fpm5.3="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php5.3.yml up -d php"
 # switch to different mariadb versions
 alias lamp-mariadb="lamp stop db && lamp rm -f db && lamp up -d db"
-alias lamp-mariadb10.1="lamp stop db && lamp rm -f db && lamp -f $LAMP_REPO/docker-compose.mariadb10.1.yml up -d db"
+alias lamp-mariadb10.1="lamp stop db && lamp rm -f db && lamp -f $LEMP_REPO/docker-compose.mariadb10.1.yml up -d db"
 ```
 
 Worflow example:
@@ -36,7 +36,7 @@ alias mysqldump="docker exec -i lamp_db mysqldump"
 ### PHP
 To use PHP CLI you can add a function like this one:
 ```
-function php() {
+php() {
     DEVELOPMENT_PATH=/Users/<me>/Development
     ABSOLUTE_PATH=$(pwd)
     RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
@@ -62,7 +62,7 @@ So we have to substitute the absolute OSX path to guess the folder path for the 
 
 ### Composer
 ```
-function composer() {
+composer() {
     docker run --rm -it \
         -v $(pwd):/usr/src/app \
         -v ~/.composer:/home/composer/.composer \
@@ -74,7 +74,7 @@ function composer() {
 
 ### WP-CLI
 ```
-function wp() {
+wp() {
     docker run -it --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
@@ -85,11 +85,21 @@ function wp() {
 
 ### n98-magerun (1.x)
 ```
-function n98() {
+n98() {
     docker run -it --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/n98-magerun-alpine ${@:1}
+}
+```
+
+### PHPUnit
+```
+phpunit() {
+    docker run --rm -it \
+        -v $(pwd):/app \
+        --net=$DOCKER_NETWORK_NAME \
+        phpunit/phpunit:latest ${@:1}
 }
 ```

@@ -19,12 +19,18 @@ Enable a default conf to serve PHP files:
 $ cp nginx/conf.d/000-default.conf.dist nginx/conf.d/000-default.conf
 ```
 
+
 Obviously you can add other config file to add others projects (see `example.conf.dist`).
 
-
-### PHP conf
+### PHP conf (optional)
 
 Set your custom php.ini variables here `php/php.ini`.
+
+Add a dummy phpinfo: 
+
+```
+$ echo "<?php phpinfo() ?>" > ~/Development/index.php
+```
 
 ### Restart web/php container
 
@@ -38,13 +44,14 @@ $ docker-compose -f /path/to/docker/docker-compose.yml restart php web
 Add an entry into `/etc/hosts` to point to your custom domain, ie:
 ```
 # OSX
-192.168.99.100 local.dev
+192.168.99.100 my.local
 
 # Linux
-127.0.0.1 local.dev
+127.0.0.1 my.local
 ```
 
-Go to your browser : http://local.dev
+
+Go to your browser : http://my.local/
 
 ## What's next?
 * [Aliases and CLI](aliases.md)
