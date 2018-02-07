@@ -18,7 +18,8 @@ services:
         container_name: lamp_php
         volumes:
             - ~/Development:/app
-            - ./php/php.ini:/usr/local/etc/php/conf.d/50-settings.ini
+            # to override some php settings, uncomment below
+            # - ./php/php.ini:/etc/php7/conf.d/50-setting.ini
         ports:
             - 9000:9000
 

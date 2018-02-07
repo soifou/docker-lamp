@@ -1,3 +1,4 @@
+; General
 always_populate_raw_post_data = -1
 date.timezone = Europe/Paris
 display_errors = On
@@ -9,6 +10,22 @@ session.auto_start = Off
 short_open_tag = Off
 upload_max_filesize = 100M
 
+; XDebug
+;xdebug.idekey = sublime.xdebug
+;xdebug.profiler_enable_trigger = 1
+;xdebug.profiler_output_name = callgrind.out.%p
+;xdebug.remote_connect_back = 0
+;xdebug.remote_enable = 1
+;xdebug.remote_handler = "dbgp"
+;xdebug.remote_host = 10.254.254.254
+;xdebug.remote_log = /tmp/xdebug.log
+;xdebug.remote_mod = req
+;xdebug.remote_port = 9001
+;xdebug.var_display_max_children = -1
+;xdebug.var_display_max_data = -1
+;xdebug.var_display_max_depth = -1
+
+; OpCache
 ;opcache.enable=1
 ;opcache.enable_cli=1
 ;opcache.memory_consumption=128

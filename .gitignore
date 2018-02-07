@@ -3,5 +3,6 @@ nginx/conf.d/*
 !nginx/conf.d/*.dist
 nginx/rewrites/*
 !nginx/rewrites/.gitkeep
+php/php.ini
 docker-compose.yml
 hosts
