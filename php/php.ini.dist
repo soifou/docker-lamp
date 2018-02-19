@@ -10,7 +10,10 @@ session.auto_start = Off
 short_open_tag = Off
 upload_max_filesize = 100M
 
-; XDebug
+; XDebug (disabled)
+xdebug.default_enable = 0
+
+; XDebug (enabled)
 ;xdebug.idekey = sublime.xdebug
 ;xdebug.profiler_enable_trigger = 1
 ;xdebug.profiler_output_name = callgrind.out.%p
