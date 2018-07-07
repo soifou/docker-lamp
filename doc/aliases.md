@@ -2,7 +2,8 @@
 
 ### LEMP
 Some useful aliases to manage your containers.
-```
+
+```sh
 LEMP_REPO="/path/to/lamp"
 alias lamp="docker-compose -f $LEMP_REPO/docker-compose.yml"
 
@@ -27,7 +28,8 @@ Worflow example:
 
 ### MySQL
 To play with `mysql` from CLI you can add theses aliases:
-```
+
+```sh
 alias mysql-cli="docker exec -it lamp_db mysql -uroot -proot"
 alias mysql="docker exec -i lamp_db mysql"
 alias mysqldump="docker exec -i lamp_db mysqldump"
@@ -35,7 +37,8 @@ alias mysqldump="docker exec -i lamp_db mysqldump"
 
 ### PHP
 To use PHP CLI you can add a function like this one:
-```
+
+```sh
 php() {
     DEVELOPMENT_PATH=/Users/<me>/Development
     ABSOLUTE_PATH=$(pwd)
@@ -50,6 +53,7 @@ php() {
         soifou/php-alpine:cli-7.0 ${@:1}
 }
 ```
+
 For instance if we are working on `project` the folder path could be here:
 - OSX : `/Users/<me>/Development/project1`
 - Docker : `/app/project1`
@@ -61,7 +65,8 @@ Or inside inside a subfolder:
 So we have to substitute the absolute OSX path to guess the folder path for the current project in the php container.
 
 ### Composer
-```
+
+```sh
 composer() {
     docker run --rm -it \
         -v $(pwd):/usr/src/app \
@@ -73,7 +78,8 @@ composer() {
 ```
 
 ### WP-CLI
-```
+
+```sh
 wp() {
     docker run -it --rm \
         -v $(pwd):/mnt \
@@ -84,7 +90,8 @@ wp() {
 ```
 
 ### n98-magerun (1.x)
-```
+
+```sh
 n98() {
     docker run -it --rm \
         -v $(pwd):/mnt \
@@ -95,7 +102,8 @@ n98() {
 ```
 
 ### PHPUnit
-```
+
+```sh
 phpunit() {
     docker run --rm -it \
         -v $(pwd):/app \

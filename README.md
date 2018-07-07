@@ -11,7 +11,7 @@ This is my development environment which run a Linux [LEMP stack](https://lemp.i
 
 ## Installation
 
-* [on OSX](doc/install-osx.md)
+* [on macOS](doc/install-osx.md)
 * [on Linux](doc/install-linux.md)
 
 ## What next?
