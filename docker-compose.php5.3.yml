@@ -3,5 +3,5 @@ services:
     php:
         image: helder/php-5.3
         volumes:
-            - ./php/php.ini:/etc/php5/conf.d/50-setting.ini
+            - ./php/php.ini:/etc/php5/conf.d/50_setting.ini
             - ~/Development:/var/www/html
