@@ -1,12 +1,14 @@
 version: '2'
 services:
     web:
-        image: nginx:1.13-alpine
+        image: nginx:1.15-alpine
         container_name: lamp_web
         ports:
             - 80:80
+            - 443:443
         volumes:
             - ~/Development:/app
+            - ./nginx/ssl/:/etc/nginx/ssl
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
             - ./nginx/fastcgi_params:/etc/nginx/fastcgi_params
             - ./nginx/conf.d:/etc/nginx/conf.d

@@ -18,6 +18,7 @@ This is my development environment which run a Linux [LEMP stack](https://lemp.i
 
 * [Post configuration](doc/config.md)
 * [Aliases and CLI](doc/aliases.md)
+* [Trusted development SSL certificates](doc/ssl.md)
 
 ## Read further
 * http://mmenozzi.github.io/2016/01/22/php-web-development-with-docker/

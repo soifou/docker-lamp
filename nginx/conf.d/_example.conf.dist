@@ -2,7 +2,7 @@
 # SYMFONY 2/3
 ####################################################
 server {
-    server_name www.symfony.dev;
+    server_name www.symfony.local;
     root /app/symfony/web;
     error_log off;
     access_log off;
@@ -13,7 +13,7 @@ server {
 # SYMFONY 4
 ####################################################
 server {
-    server_name www.sf4.dev;
+    server_name www.sf4.local;
     root /app/sf4/public;
     error_log off;
     access_log off;
@@ -24,7 +24,7 @@ server {
 # LARAVEL
 ####################################################
 server {
-    server_name www.laravel.dev;
+    server_name www.laravel.local;
     root /app/laravel/public;
     error_log off;
     access_log off;
@@ -35,7 +35,7 @@ server {
 # WORDPRESS
 ####################################################
 server {
-    server_name wordpress.dev;
+    server_name wordpress.local;
     root /app/wordpress;
     error_log off;
     access_log off;
@@ -46,7 +46,7 @@ server {
 # MAGENTO
 ####################################################
 server {
-    server_name magento.dev;
+    server_name magento.local;
     root /app/magento;
 
     access_log off;
@@ -77,7 +77,7 @@ server {
 # PRESTASHOP 1.6
 ####################################################
 server {
-    server_name prestashop.dev;
+    server_name prestashop.local;
     root /app/prestashop;
     access_log off;
     include snippets/prestashop.conf;
@@ -87,7 +87,7 @@ server {
 # CODEIGNITER
 ####################################################
 server {
-    server_name codeigniter.dev;
+    server_name codeigniter.local;
     root /app/codeigniter;
     index index.php;
     include snippets/basic-php.conf;
@@ -97,8 +97,25 @@ server {
 # ZEND
 ####################################################
 server {
-    server_name zend.dev;
+    server_name zend.local;
     root /app/zend/public;
     index index.php;
+    include snippets/basic-php.conf;
+}
+
+####################################################
+# SECURED
+####################################################
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    server_name secured.local;
+    root /app/secured;
+
+    include snippets/ssl.conf;
+    ssl_certificate /etc/nginx/ssl/secured.local.pem;
+    ssl_certificate_key  /etc/nginx/ssl/secured.local-key.pem;
+
     include snippets/basic-php.conf;
 }
