@@ -18,9 +18,11 @@ This is my development environment which run a Linux [LEMP stack](https://lemp.i
 
 * [Post configuration](doc/config.md)
 * [Aliases and CLI](doc/aliases.md)
+* [Local development with Wildcard DNS](doc/dns.md)
 * [Trusted development SSL certificates](doc/ssl.md)
 
 ## Read further
+
 * http://mmenozzi.github.io/2016/01/22/php-web-development-with-docker/
 * https://github.com/nerdpress-org/docker-sf3
 * http://stackoverflow.com/questions/40012198/docker-custom-dns-resolve-among-containers

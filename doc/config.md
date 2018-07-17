@@ -61,8 +61,6 @@ Each time you create/delete a server block, you must update your hosts file acco
 You should try instead to setup a DNS server to avoid these tedious task.
 I use dnsmasq and it works like a charm.
 
-
-
 ### 6 - Finish
 
 No more require config. Check in your browser your awesome new project: http://my.local/
@@ -70,3 +68,5 @@ No more require config. Check in your browser your awesome new project: http://m
 
 ## What's next?
 * [Aliases and CLI](aliases.md)
+* [Local development with Wildcard DNS](doc/dns.md)
+* [Trusted development SSL certificates](doc/ssl.md)

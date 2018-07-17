@@ -7,4 +7,3 @@ nginx/rewrites/*
 !nginx/rewrites/.gitkeep
 php/php.ini
 docker-compose.yml
-hosts
