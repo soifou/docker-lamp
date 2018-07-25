@@ -1,4 +1,6 @@
-version: '2'
+---
+version: '3.6'
+
 services:
     web:
         image: nginx:1.15-alpine
@@ -21,7 +23,7 @@ services:
         volumes:
             - ~/Development:/app
             # to override some php settings, uncomment below
-            # - ./php/php.ini:/etc/php7/conf.d/50-setting.ini
+            # - ./php/php.ini:/etc/php7/conf.d/50_setting.ini
         ports:
             - 9000:9000
 
