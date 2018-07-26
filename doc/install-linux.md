@@ -6,7 +6,6 @@
 
 ## Init
 ```
-$ docker network create --driver bridge lamp-network
 $ cp docker-compose.yml.dist docker-compose.yml
 ```
 

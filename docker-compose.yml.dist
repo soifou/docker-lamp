@@ -1,6 +1,10 @@
 ---
 version: '3.6'
 
+networks:
+    lamp-network:
+        name: lamp-network
+
 services:
     web:
         image: nginx:1.15-alpine
@@ -16,6 +20,8 @@ services:
             - ./nginx/conf.d:/etc/nginx/conf.d
             - ./nginx/snippets:/etc/nginx/snippets
             - ./nginx/rewrites:/etc/nginx/rewrites
+        networks:
+            - lamp-network
 
     php:
         image: soifou/php-alpine:fpm-7.2
@@ -26,6 +32,8 @@ services:
             # - ./php/php.ini:/etc/php7/conf.d/50_setting.ini
         ports:
             - 9000:9000
+        networks:
+            - lamp-network
 
     db:
         image: wodby/mariadb:10.2
@@ -38,18 +46,19 @@ services:
             # - /wherever/u/want:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
+        networks:
+            - lamp-network
 
     maildev:
         image: djfarrelly/maildev
         container_name: lamp_mail
         ports:
             - 1080:80
+        networks:
+            - lamp-network
 
     redis:
         image: redis:alpine
         container_name: lamp_redis
-
-networks:
-    default:
-        external:
-            name: lamp-network
+        networks:
+            - lamp-network

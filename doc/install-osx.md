@@ -42,7 +42,6 @@ $ docker-machine create --xhyve-cpu-count=2 --xhyve-memory-size=8192 --xhyve-dis
 
 ```sh
 $ eval $(docker-machine env dev-nfs)
-$ docker network create --driver bridge lamp-network
 $ cp docker-compose.yml.dist docker-compose.yml
 $ docker-compose -f /path/to/docker/docker-compose up -d
 ```
