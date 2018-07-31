@@ -68,5 +68,5 @@ No more require config. Check in your browser your awesome new project: http://m
 
 ## What's next?
 * [Aliases and CLI](aliases.md)
-* [Local development with Wildcard DNS](doc/dns.md)
-* [Trusted development SSL certificates](doc/ssl.md)
+* [Local development with Wildcard DNS](dns.md)
+* [Trusted development SSL certificates](ssl.md)
