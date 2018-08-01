@@ -1,4 +1,5 @@
-version: '2'
+---
+version: '3.6'
 services:
     php:
         image: soifou/php-alpine:fpm-7.0

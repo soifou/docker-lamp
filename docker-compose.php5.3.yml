@@ -1,4 +1,5 @@
-version: '2'
+---
+version: '3.6'
 services:
     php:
         image: helder/php-5.3
