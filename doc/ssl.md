@@ -20,11 +20,10 @@ web:
 
 Using [mkcert](https://github.com/FiloSottile/mkcert) you can easily generate trusted certificates:
 
-```
+```sh
 $ mkcert secured.local
 $ mv secured.local* /dir/to/nginx/ssl
 ```
-
 
 3 - Configure server block to serve https:
 
@@ -55,7 +54,7 @@ $ docker-compose restart web
 ```sh
 $ curl -I https://secured.local
 
-HTTP/2 200 
+HTTP/2 200
 server: nginx/1.15.1
 content-type: text/html; charset=UTF-8
 x-powered-by: PHP/7.2.1

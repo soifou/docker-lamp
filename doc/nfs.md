@@ -8,7 +8,7 @@ Nice read (in french): https://www.synbioz.com/blog/docker_on_steroid_avec_xhyve
 
 ---
 
-VirtualBox use `vboxfs` which is incredibly slow, specially when you deal with some PHP frameworks (ie. Symfony, Laravel) that require constant read/write. 
+VirtualBox use `vboxfs` which is incredibly slow, specially when you deal with some PHP frameworks (ie. Symfony, Laravel) that require constant read/write.
 
 It exists [some alternatives](https://github.com/brikis98/docker-osx-dev#alternatives) to speed up your environment.
 

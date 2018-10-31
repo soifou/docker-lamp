@@ -1,6 +1,7 @@
 ## Aliases and CLI
 
 ### LEMP
+
 Some useful aliases to manage your containers.
 
 ```sh
@@ -19,14 +20,16 @@ alias lamp-mariadb10.1="lamp stop db && lamp rm -f db && lamp -f $LEMP_REPO/dock
 ```
 
 Worflow example:
-* `lamp up -d`: Create and start containers
-* `lamp-fpm5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
-* `lamp-fpm`: Switch back to your latest PHP-FPM container
-* `lamp-mariadb10.1`: Use MariaDB 10.1 instead
-* `lamp stop`: Stop your containers
-* `lamp rm -f`: Remove your container
+
+-   `lamp up -d`: Create and start containers
+-   `lamp-fpm5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
+-   `lamp-fpm`: Switch back to your latest PHP-FPM container
+-   `lamp-mariadb10.1`: Use MariaDB 10.1 instead
+-   `lamp stop`: Stop your containers
+-   `lamp rm -f`: Remove your container
 
 ### MySQL
+
 To play with `mysql` from CLI you can add theses aliases:
 
 ```sh
@@ -36,6 +39,7 @@ alias mysqldump="docker exec -i lamp_db mysqldump"
 ```
 
 ### PHP
+
 To use PHP CLI you can add a function like this one:
 
 ```sh
@@ -55,12 +59,14 @@ php() {
 ```
 
 For instance if we are working on `project` the folder path could be here:
-- OSX : `/Users/<me>/Development/project1`
-- Docker : `/app/project1`
+
+-   OSX : `/Users/<me>/Development/project1`
+-   Docker : `/app/project1`
 
 Or inside inside a subfolder:
-- OSX : `/Users/<me>/Development/repository1/project1`
-- Docker : `/app/repository1/project1`
+
+-   OSX : `/Users/<me>/Development/repository1/project1`
+-   Docker : `/app/repository1/project1`
 
 So we have to substitute the absolute OSX path to guess the folder path for the current project in the php container.
 

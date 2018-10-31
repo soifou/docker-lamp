@@ -1,7 +1,8 @@
 # Docker Toolbox on OSX
 
 ## Prerequisites
-- [HomeBrew](http://brew.sh/)
+
+-   [HomeBrew](http://brew.sh/)
 
 ## Init
 
@@ -13,7 +14,7 @@ $ brew install docker docker-machine docker-compose
 
 2 - Create a docker machine using chosen driver:
 
-*Using [virtualbox]() driver with NFS*
+_Using [virtualbox](https://www.virtualbox.org/) driver with NFS_
 
 ```sh
 # install prerequisites
@@ -26,7 +27,7 @@ $ docker-machine create --driver virtualbox dev-nfs
 $ docker-machine-nfs dev-nfs
 ```
 
-*Using [xhyve](https://github.com/mist64/xhyve) driver*
+_Using [xhyve](https://github.com/mist64/xhyve) driver_
 
 ```sh
 # install/config prerequisites
@@ -46,12 +47,11 @@ $ cp docker-compose.yml.dist docker-compose.yml
 $ docker-compose -f /path/to/docker/docker-compose up -d
 ```
 
-
 ## Why NFS ?
 
-* [OSX Network File System](nfs.md)
+-   [OSX Network File System](nfs.md)
 
-## Tweak 
+## Tweak
 
 Since you have to add docker vars each time you load a shell, add this to your bashrc/zshrc/whateverrc:
 
@@ -70,9 +70,9 @@ $ env | grep DOCKER
 
 ## What's next?
 
-* [Post configuration](config.md)
+-   [Post configuration](config.md)
 
 ## Read further
 
-* https://www.docker.com/products/docker-toolbox
-* https://docs.docker.com/machine/get-started/
+-   https://www.docker.com/products/docker-toolbox
+-   https://docs.docker.com/machine/get-started/

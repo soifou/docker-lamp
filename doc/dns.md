@@ -1,6 +1,6 @@
 # DNS
 
-There is dozen of possibilities to avoid to touch host file and benefit from domain wilcards. 
+There is dozen of possibilities to avoid to touch host file and benefit from domain wilcards.
 
 I use dnsmasq, a small dns server.
 
@@ -8,7 +8,7 @@ I use dnsmasq, a small dns server.
 
 Debian (and Debian based distrib) comes with a dnsmasq packaged with the [networkmanager](https://wiki.archlinux.org/index.php/NetworkManager) utility.
 
-To redirect all your local domains (ie. *.test), simply add an entry to `/etc/NetworkManager/dnsmasq.d/` and restart networkmanager:
+To redirect all your local domains (ie. \*.test), simply add an entry to `/etc/NetworkManager/dnsmasq.d/` and restart networkmanager:
 
 ```sh
 # echo "address=/test/127.0.0.1" > /etc/NetworkManager/dnsmasq.d/docker
@@ -32,7 +32,6 @@ $ sudo brew services start dnsmasq
 ```
 
 More info [here](https://blog.thesparktree.com/local-development-with-wildcard-dns) and [there](https://passingcuriosity.com/2013/dnsmasq-dev-osx/).
-
 
 ## Docker way
 

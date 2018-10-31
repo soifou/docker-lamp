@@ -12,8 +12,8 @@ web:
     [...]
 ```
 
-- `~/Development` is my local folder where I store all my web projects.
-- `/app` is the root folder for web/php container, don't change it.
+-   `~/Development` is my local folder where I store all my web projects.
+-   `/app` is the root folder for web/php container, don't change it.
 
 ### 2 - Nginx conf
 
@@ -29,7 +29,7 @@ Obviously you can add other config file to add others projects (see `_example.co
 
 Set your custom php.ini variables here `php/php.ini`.
 
-Add a dummy phpinfo: 
+Add a dummy phpinfo:
 
 ```
 $ echo "<?php phpinfo() ?>" > ~/Development/index.php
@@ -65,8 +65,8 @@ I use dnsmasq and it works like a charm.
 
 No more require config. Check in your browser your awesome new project: http://my.local/
 
-
 ## What's next?
-* [Aliases and CLI](aliases.md)
-* [Local development with Wildcard DNS](dns.md)
-* [Trusted development SSL certificates](ssl.md)
+
+-   [Aliases and CLI](aliases.md)
+-   [Local development with Wildcard DNS](dns.md)
+-   [Trusted development SSL certificates](ssl.md)
