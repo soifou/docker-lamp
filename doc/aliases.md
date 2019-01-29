@@ -10,6 +10,7 @@ alias lamp="docker-compose -f $LEMP_REPO/docker-compose.yml"
 
 # switch to different php-fpm versions
 alias lamp-fpm="lamp stop php && lamp rm -f php && lamp up -d php"
+alias lamp-fpm7.2="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.2.yml up -d php"
 alias lamp-fpm7.1="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.1.yml up -d php"
 alias lamp-fpm7.0="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.0.yml up -d php"
 alias lamp-fpm5.6="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php5.6.yml up -d php"

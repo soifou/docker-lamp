@@ -24,7 +24,7 @@ services:
             - lamp-network
 
     php:
-        image: soifou/php-alpine:fpm-7.2
+        image: soifou/php-alpine:fpm-7.3
         container_name: lamp_php
         volumes:
             - ~/Development:/app
