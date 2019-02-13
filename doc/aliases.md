@@ -18,6 +18,7 @@ alias lamp-fpm5.3="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-
 # switch to different mariadb versions
 alias lamp-mariadb="lamp stop db && lamp rm -f db && lamp up -d db"
 alias lamp-mariadb10.1="lamp stop db && lamp rm -f db && lamp -f $LEMP_REPO/docker-compose.mariadb10.1.yml up -d db"
+alias lamp-mariadb10.2="lamp stop db && lamp rm -f db && lamp -f $LEMP_REPO/docker-compose.mariadb10.2.yml up -d db"
 ```
 
 Worflow example:

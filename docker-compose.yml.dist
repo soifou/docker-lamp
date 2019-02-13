@@ -36,7 +36,7 @@ services:
             - lamp-network
 
     db:
-        image: wodby/mariadb:10.2
+        image: wodby/mariadb:10.3
         container_name: lamp_db
         # to persist databases, uncomment below
         # volumes:

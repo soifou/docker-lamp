@@ -2,7 +2,7 @@
 version: '3.6'
 services:
     db:
-        image: wodby/mariadb:10.2
+        image: soifou/mariadb-alpine
         # to persist databases, uncomment below
         # volumes:
             # for macOS
