@@ -2,13 +2,4 @@
 version: '3.6'
 services:
     db:
-        image: wodby/mariadb:10.2
-        # to persist databases, uncomment below
-        # volumes:
-            # for macOS
-            # - /var/lib/boot2docker/mariadb:/data/db/mysql
-            # for linux
-            # - /wherever/u/want:/data/db/mysql
-        environment:
-            DB_USER: root
-            DB_PASS: root
+        image: wodby/mariadb:10.1
