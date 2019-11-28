@@ -1,0 +1,5 @@
+---
+version: '3.6'
+services:
+    db:
+        image: wodby/mariadb:10.4

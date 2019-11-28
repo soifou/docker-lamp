@@ -1,9 +1,14 @@
 ---
-version: '3.6'
+# @see: https://docs.docker.com/compose/compose-file/
+version: '3.7'
 
 networks:
     lamp-network:
         name: lamp-network
+        # ipam:
+        #     driver: default
+        #     config:
+        #         - subnet: "172.18.0.0/24"
 
 services:
     web:
@@ -22,6 +27,12 @@ services:
             - ./nginx/rewrites:/etc/nginx/rewrites
         networks:
             - lamp-network
+            # to set specific subnet fixed ip,
+            # useful if you need to map a hostname to this container
+            # lamp-network:
+            #     ipv4_address: 172.18.0.6
+        depends_on:
+            - php
 
     php:
         image: soifou/php-alpine:fpm-7.3
@@ -32,6 +43,10 @@ services:
             # - ./php/php.ini:/etc/php7/conf.d/50_setting.ini
         ports:
             - 9000:9000
+        # if php container need to be aware of api.test running on container web
+        # you can set an extra hosts in /etc/hosts like below:
+        # extra_hosts:
+        #     - api.test:172.18.0.6
         networks:
             - lamp-network
 
@@ -62,3 +77,19 @@ services:
         container_name: lamp_redis
         networks:
             - lamp-network
+
+    # mercure:
+    #     image: dunglas/mercure
+    #     container_name: lamp_mercure
+    #     ports:
+    #         - 8000:80
+    #         - 3000:3000
+    #     environment:
+    #         JWT_KEY: aVerySecretKey
+    #         DEMO: 1
+    #         ALLOW_ANONYMOUS: 1
+    #         CORS_ALLOWED_ORIGINS: '*'
+    #         PUBLISH_ALLOWED_ORIGINS: http://localhost
+    #     networks:
+    #         lamp-network:
+    #             ipv4_address: 172.18.0.10
