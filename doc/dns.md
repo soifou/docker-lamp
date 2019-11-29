@@ -4,16 +4,35 @@ There is dozen of possibilities to avoid to touch host file and benefit from dom
 
 I use dnsmasq, a small dns server.
 
-## Debian way
+## Linux way
 
-Debian (and Debian based distrib) comes with a dnsmasq packaged with the [networkmanager](https://wiki.archlinux.org/index.php/NetworkManager) utility.
+Arch and Debian comes with a dnsmasq packaged with the [NetworkManager](https://wiki.archlinux.org/index.php/NetworkManager) utility.
 
-To redirect all your local domains (ie. \*.test), simply add an entry to `/etc/NetworkManager/dnsmasq.d/` and restart networkmanager:
+To redirect all your local domains (ie. \*.test), 
+
+1 - Check NetworkManager use dnsmasq as DNS resolver:
+
+File: `/etc/NetworkManager/NetworkManager.conf`
+
+```ini
+[main]
+dns=dnsmasq
+```
+
+2 - Add an entry to `/etc/NetworkManager/dnsmasq.d/` and restart NetworkManager:
 
 ```sh
 # echo "address=/test/127.0.0.1" > /etc/NetworkManager/dnsmasq.d/docker
 # systemctl restart NetworkManager
 ```
+
+3 - Verify `/etc/resolv.conf` content, it should be:
+
+```
+search home
+nameserver 127.0.0.1
+```
+
 
 ## macOS way
 
