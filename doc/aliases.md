@@ -8,26 +8,27 @@ Some useful aliases to manage your containers.
 LEMP_REPO="/path/to/lamp"
 alias lamp="docker-compose -f $LEMP_REPO/docker-compose.yml"
 
-# switch to different php-fpm versions
-alias lamp-fpm="lamp stop php && lamp rm -f php && lamp up -d php"
-alias lamp-fpm7.2="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.2.yml up -d php"
-alias lamp-fpm7.1="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.1.yml up -d php"
-alias lamp-fpm7.0="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php7.0.yml up -d php"
-alias lamp-fpm5.6="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php5.6.yml up -d php"
-alias lamp-fpm5.3="lamp stop php && lamp rm -f php && lamp -f $LEMP_REPO/docker-compose.php5.3.yml up -d php"
-# switch to different mariadb versions
-alias lamp-mariadb="lamp stop db && lamp rm -f db && lamp up -d db"
-alias lamp-mariadb10.1="lamp stop db && lamp rm -f db && lamp -f $LAMP_REPO/docker-compose.mariadb10.1.yml up -d db"
-alias lamp-mariadb10.2="lamp stop db && lamp rm -f db && lamp -f $LAMP_REPO/docker-compose.mariadb10.2.yml up -d db"
-alias lamp-mariadb10.4="lamp stop db && lamp rm -f db && lamp -f $LAMP_REPO/docker-compose.mariadb10.4.yml up -d db"
+# switch to different php-fpm versions (5.3, 5.6, 7.0, 7.1, 7.2, 7.3, default 7.4)
+lamp-fpm() {
+    lamp stop php
+    lamp rm -f php
+    [ "$1" ] && lamp -f "$LAMP_REPO/docker-compose.php$1.yml" up -d php || lamp up -d php
+}
+
+# switch to different mariadb versions (10.1, 10.2, default 10.3, 10.4)
+lamp-mariadb() {
+    lamp stop db
+    lamp rm -f db
+    [ "$1" ] && lamp -f "$LAMP_REPO/docker-compose.mariadb$1.yml" up -d db || lamp up -d db
+}
 ```
 
 Worflow example:
 
 -   `lamp up -d`: Create and start containers
--   `lamp-fpm5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
+-   `lamp-fpm 5.6`: Use PHP 5.6 container instead of latest PHP-FPM container
 -   `lamp-fpm`: Switch back to your latest PHP-FPM container
--   `lamp-mariadb10.1`: Use MariaDB 10.1 instead
+-   `lamp-mariadb 10.1`: Use MariaDB 10.1 instead
 -   `lamp stop`: Stop your containers
 -   `lamp rm -f`: Remove your container
 

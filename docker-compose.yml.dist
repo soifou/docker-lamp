@@ -12,7 +12,7 @@ networks:
 
 services:
     web:
-        image: nginx:1.15-alpine
+        image: nginx:1.17-alpine
         container_name: lamp_web
         ports:
             - 80:80
@@ -35,7 +35,7 @@ services:
             - php
 
     php:
-        image: soifou/php-alpine:fpm-7.3
+        image: soifou/php-alpine:fpm-7.4
         container_name: lamp_php
         volumes:
             - ~/Development:/app
@@ -51,14 +51,14 @@ services:
             - lamp-network
 
     db:
-        image: wodby/mariadb:10.3
+        image: wodby/mariadb:10.4
         container_name: lamp_db
         # to persist databases, uncomment below
         # volumes:
             # for macOS
             # - /var/lib/boot2docker/mariadb:/var/lib/mysql
             # for linux
-            # - /wherever/u/want:/var/lib/mysql
+            # - /local/path/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
         networks:
@@ -72,11 +72,25 @@ services:
         networks:
             - lamp-network
 
-    redis:
-        image: redis:alpine
-        container_name: lamp_redis
-        networks:
-            - lamp-network
+    # redis:
+    #     image: redis:alpine
+    #     container_name: lamp_redis
+    #     networks:
+    #         - lamp-network
+
+    # mongodb:
+    #     image: mvertes/alpine-mongo
+    #     container_name: lamp_mongodb
+    #     # override default start command, disabling journal here
+    #     # https://github.com/mvertes/docker-alpine-mongo/blob/e7c9db6391c5495bc6221c60d7e577178cb3d0d3/Dockerfile#L10
+    #     command: ["mongod", "--bind_ip", "0.0.0.0", "--nojournal"]
+    #     # volumes:
+    #     #     - /local/path/mongodb:/data/db
+    #     ports:
+    #         - 27017:27017
+    #         # - 28017:28017
+    #     networks:
+    #         - lamp-network
 
     # mercure:
     #     image: dunglas/mercure
@@ -85,7 +99,7 @@ services:
     #         - 8000:80
     #         - 3000:3000
     #     environment:
-    #         JWT_KEY: aVerySecretKey
+    #         JWT_KEY: '!ChangeMe!'
     #         DEMO: 1
     #         ALLOW_ANONYMOUS: 1
     #         CORS_ALLOWED_ORIGINS: '*'
