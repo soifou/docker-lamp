@@ -65,7 +65,7 @@ services:
             - lamp-network
 
     maildev:
-        image: djfarrelly/maildev
+        image: maildev/maildev
         container_name: lamp_mail
         ports:
             - 1080:80
