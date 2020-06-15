@@ -12,7 +12,7 @@ networks:
 
 services:
     web:
-        image: nginx:1.17-alpine
+        image: nginx:stable-alpine
         container_name: lamp_web
         ports:
             - 80:80
