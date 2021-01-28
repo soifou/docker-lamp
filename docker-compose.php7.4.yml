@@ -1,0 +1,7 @@
+---
+version: '3.7'
+services:
+    php:
+        image: soifou/php-alpine:fpm-7.4
+        volumes:
+            - ./php/php.ini:/etc/php7/conf.d/50_setting.ini

@@ -35,12 +35,12 @@ services:
             - php
 
     php:
-        image: soifou/php-alpine:fpm-7.4
+        image: soifou/php-alpine:fpm-8.0
         container_name: lamp_php
         volumes:
             - ~/Development:/app
             # to override some php settings, uncomment below
-            # - ./php/php.ini:/etc/php7/conf.d/50_setting.ini
+            # - ./php/php.ini:/etc/php8/conf.d/50_setting.ini
         ports:
             - 9000:9000
         # if php container need to be aware of api.test running on container web
@@ -51,7 +51,7 @@ services:
             - lamp-network
 
     db:
-        image: wodby/mariadb:10.4
+        image: wodby/mariadb:10.5
         container_name: lamp_db
         # to persist databases, uncomment below
         # volumes:
