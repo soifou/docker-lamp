@@ -1,5 +1,5 @@
 ---
-# @see: https://docs.docker.com/compose/compose-file/
+# See: https://docs.docker.com/compose/compose-file/
 version: '3.7'
 
 networks:
@@ -35,7 +35,7 @@ services:
             - php
 
     php:
-        image: soifou/php-alpine:fpm-8.0
+        image: soifou/php-alpine:fpm-8.2
         container_name: lamp_php
         volumes:
             - ~/Development:/app
@@ -51,7 +51,7 @@ services:
             - lamp-network
 
     db:
-        image: wodby/mariadb:10.5
+        image: wodby/mariadb:10.8
         container_name: lamp_db
         # to persist databases, uncomment below
         # volumes:
@@ -59,6 +59,10 @@ services:
             # - /var/lib/boot2docker/mariadb:/var/lib/mysql
             # for linux
             # - /local/path/mysql:/var/lib/mysql
+        # on laptop, if you notice some performance issue on database operations
+        # and your databases are stored on a ext [3/4] filesystem,
+        # see if disabling barrier (man mount) in /etc/fstab helps
+        # For more information, read: https://lwn.net/Articles/283161/
         environment:
             MYSQL_ROOT_PASSWORD: root
         networks:
@@ -72,38 +76,48 @@ services:
         networks:
             - lamp-network
 
-    # redis:
-    #     image: redis:alpine
-    #     container_name: lamp_redis
-    #     networks:
-    #         - lamp-network
+    redis:
+        image: redis:alpine
+        container_name: lamp_redis
+        networks:
+            - lamp-network
 
-    # mongodb:
-    #     image: mvertes/alpine-mongo
-    #     container_name: lamp_mongodb
-    #     # override default start command, disabling journal here
-    #     # https://github.com/mvertes/docker-alpine-mongo/blob/e7c9db6391c5495bc6221c60d7e577178cb3d0d3/Dockerfile#L10
-    #     command: ["mongod", "--bind_ip", "0.0.0.0", "--nojournal"]
-    #     # volumes:
-    #     #     - /local/path/mongodb:/data/db
-    #     ports:
-    #         - 27017:27017
-    #         # - 28017:28017
-    #     networks:
-    #         - lamp-network
+    mongodb:
+        image: mvertes/alpine-mongo
+        container_name: lamp_mongodb
+        # override default start command, disabling journal here
+        # https://github.com/mvertes/docker-alpine-mongo/blob/e7c9db6391c5495bc6221c60d7e577178cb3d0d3/Dockerfile#L10
+        command: ["mongod", "--bind_ip", "0.0.0.0", "--nojournal"]
+        # volumes:
+        #     - /local/path/mongodb:/data/db
+        ports:
+            - 27017:27017
+            # - 28017:28017
+        networks:
+            - lamp-network
 
-    # mercure:
-    #     image: dunglas/mercure
-    #     container_name: lamp_mercure
-    #     ports:
-    #         - 8000:80
-    #         - 3000:3000
-    #     environment:
-    #         JWT_KEY: '!ChangeMe!'
-    #         DEMO: 1
-    #         ALLOW_ANONYMOUS: 1
-    #         CORS_ALLOWED_ORIGINS: '*'
-    #         PUBLISH_ALLOWED_ORIGINS: http://localhost
-    #     networks:
-    #         lamp-network:
-    #             ipv4_address: 172.18.0.10
+    mercure:
+        image: dunglas/mercure
+        container_name: lamp_mercure
+        ports:
+            - 8000:80
+            # Use a less common port this avoid to clash with nodejs apps
+            # that usually serve on port 3000
+            - 3009:3000
+        command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev
+        environment:
+            # Uncomment the following line to disable HTTPS
+            SERVER_NAME: ':80'
+            # Keys generated using: openssl rand -base64 32
+            # to avoid getting "Key provided is shorter than 256 bits, only 80 bits provided"
+            # when using hmac.256 symmetric algorith
+            MERCURE_PUBLISHER_JWT_KEY: 'Tx1xmzYVO3+VTiiTTyyPUsodZSWeltVyRNQAQ4pyA4M='
+            MERCURE_SUBSCRIBER_JWT_KEY: 'qhj3JbCrs37PLdcPtNyRVAxNvoS38zQh2Oot2fT3cKE='
+            # Mercure is on another domain (http://mercure/.well-known/mercure)
+            # we need to explicitly set domains that listen it (separate by space)
+            MERCURE_EXTRA_DIRECTIVES: |
+                ui 1
+                cors_origins http://website.test
+        networks:
+            lamp-network:
+                ipv4_address: 172.18.0.10

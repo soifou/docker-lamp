@@ -1,13 +1,11 @@
 # Trusted development SSL certificates
 
-Here's the stesp to set up a local secured website.
+Here's the steps to set up a local secured website.
 
 1 - Serve SSL from web container:
 
 ```
 web:
-    image: nginx:1.15-alpine
-    container_name: lamp_web
     ports:
         [...]
         - 443:443
@@ -21,24 +19,18 @@ web:
 Using [mkcert](https://github.com/FiloSottile/mkcert) you can easily generate trusted certificates:
 
 ```sh
+$ cd /dir/to/nginx/ssl
 $ mkcert secured.local
-$ mv secured.local* /dir/to/nginx/ssl
 ```
 
 3 - Configure server block to serve https:
 
 ```
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-
     server_name secured.local;
     root /app/secured;
 
     include snippets/ssl.conf;
-    ssl_certificate /etc/nginx/ssl/secured.local.pem;
-    ssl_certificate_key  /etc/nginx/ssl/secured.local-key.pem;
-
     include snippets/basic-php.conf;
 }
 ```
@@ -47,7 +39,10 @@ server {
 
 ```sh
 $ docker-compose restart web
+$ docker-compose exec web chown -R root:root /etc/nginx/ssl
+$ docker-compose exec web chmod 644 /etc/nginx/ssl/secured.local-key.pem
 ```
+
 
 5 - Test connection:
 
