@@ -1,5 +1,4 @@
 ---
-version: '3.7'
 services:
     php:
         image: helder/php-5.3

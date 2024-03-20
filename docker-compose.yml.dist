@@ -1,6 +1,5 @@
 ---
 # See: https://docs.docker.com/compose/compose-file/
-version: '3.7'
 
 networks:
     lamp-network:
@@ -35,7 +34,7 @@ services:
             - php
 
     php:
-        image: soifou/php-alpine:fpm-8.2
+        image: soifou/php-alpine:fpm-8.3
         container_name: lamp_php
         volumes:
             - ~/Development:/app
@@ -51,7 +50,7 @@ services:
             - lamp-network
 
     db:
-        image: wodby/mariadb:10.8
+        image: wodby/mariadb:10.11
         container_name: lamp_db
         # to persist databases, uncomment below
         # volumes:
