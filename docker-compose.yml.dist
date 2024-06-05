@@ -4,10 +4,10 @@
 networks:
     lamp-network:
         name: lamp-network
-        # ipam:
-        #     driver: default
-        #     config:
-        #         - subnet: "172.18.0.0/24"
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.18.0.0/24"
 
 services:
     web:
@@ -25,11 +25,12 @@ services:
             - ./nginx/snippets:/etc/nginx/snippets
             - ./nginx/rewrites:/etc/nginx/rewrites
         networks:
-            - lamp-network
             # to set specific subnet fixed ip,
             # useful if you need to map a hostname to this container
-            # lamp-network:
-            #     ipv4_address: 172.18.0.6
+            lamp-network:
+                ipv4_address: 172.18.0.1
+            # else
+            # - lamp-network
         depends_on:
             - php
 
@@ -47,9 +48,10 @@ services:
         # extra_hosts:
         #     - api.test:172.18.0.6
         networks:
-            - lamp-network
+            lamp-network:
+                ipv4_address: 172.18.0.2
 
-    db:
+    mysql:
         image: wodby/mariadb:10.11
         container_name: lamp_db
         # to persist databases, uncomment below
@@ -65,7 +67,24 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
         networks:
-            - lamp-network
+            lamp-network:
+                ipv4_address: 172.18.0.3
+
+    postgres:
+        # image: postgres:alpine
+        image: postgis/postgis:15-3.3-alpine  # postgres with postgis extension
+        container_name: lamp_postgres
+        restart: unless-stopped
+        environment:
+            # POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: root
+            # POSTGRES_HOST_AUTH_METHOD: trust
+        # volumes:
+        #     - /custom/mount:/var/lib/postgresql/data
+        #     - db-data:/var/lib/postgresql/data
+        networks:
+            lamp-network:
+                ipv4_address: 172.18.0.4
 
     maildev:
         image: maildev/maildev
@@ -73,13 +92,15 @@ services:
         ports:
             - 1080:80
         networks:
-            - lamp-network
+            lamp-network:
+                ipv4_address: 172.18.0.5
 
     redis:
         image: redis:alpine
         container_name: lamp_redis
         networks:
-            - lamp-network
+            lamp-network:
+                ipv4_address: 172.18.0.6
 
     mongodb:
         image: mvertes/alpine-mongo
@@ -93,7 +114,8 @@ services:
             - 27017:27017
             # - 28017:28017
         networks:
-            - lamp-network
+            lamp-network:
+                ipv4_address: 172.18.0.7
 
     mercure:
         image: dunglas/mercure
@@ -103,7 +125,7 @@ services:
             # Use a less common port this avoid to clash with nodejs apps
             # that usually serve on port 3000
             - 3009:3000
-        command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev
+        command: /usr/bin/caddy run --config /etc/caddy/dev.Caddyfile
         environment:
             # Uncomment the following line to disable HTTPS
             SERVER_NAME: ':80'
@@ -119,4 +141,4 @@ services:
                 cors_origins http://website.test
         networks:
             lamp-network:
-                ipv4_address: 172.18.0.10
+                ipv4_address: 172.18.0.8
