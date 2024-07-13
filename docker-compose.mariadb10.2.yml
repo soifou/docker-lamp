@@ -1,4 +1,4 @@
 ---
 services:
-    db:
+    mariadb:
         image: wodby/mariadb:10.2

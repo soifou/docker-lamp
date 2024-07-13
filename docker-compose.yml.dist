@@ -11,6 +11,8 @@ networks:
 
 services:
     web:
+        # To know the version: lamp exec -T web nginx -V
+        # slim build --target nginx:stable-alpine --pull --tag nginx:stable-alpine.slim --http-probe-off --include-path=/etc/nginx
         image: nginx:stable-alpine
         container_name: lamp_web
         ports:
@@ -37,6 +39,7 @@ services:
     php:
         image: soifou/php-alpine:fpm-8.3
         container_name: lamp_php
+        command: php-fpm -F
         volumes:
             - ~/Development:/app
             # to override some php settings, uncomment below
@@ -51,9 +54,9 @@ services:
             lamp-network:
                 ipv4_address: 172.18.0.2
 
-    mysql:
-        image: wodby/mariadb:10.11
-        container_name: lamp_db
+    mariadb:
+        image: jbergstroem/mariadb-alpine
+        container_name: lamp_mariadb
         # to persist databases, uncomment below
         # volumes:
             # for macOS
@@ -86,11 +89,13 @@ services:
             lamp-network:
                 ipv4_address: 172.18.0.4
 
-    maildev:
-        image: maildev/maildev
+    # To test email sending: lamp exec -T mail ./mailpit sendmail < mail.txt
+    mail:
+        image: axllent/mailpit
         container_name: lamp_mail
+        restart: unless-stopped
         ports:
-            - 1080:80
+            - 8025:80
         networks:
             lamp-network:
                 ipv4_address: 172.18.0.5

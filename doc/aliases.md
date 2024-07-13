@@ -16,7 +16,7 @@ lamp-fpm() {
 }
 
 # switch to different mariadb versions
-lamp-mysql() {
+lamp-mariadb() {
     lamp stop db
     lamp rm -f db
     [ "$1" ] && lamp -f "$LEMP_REPO/docker-compose.mariadb$1.yml" up -d db || lamp up -d db
@@ -25,21 +25,22 @@ lamp-mysql() {
 
 Worflow example:
 
-- `lamp up -d web mysql php maildev`: Create and start containers
+- `lamp up -d web mariadb php mail`: Create and start containers
 - `lamp-fpm 7.4`: Downgrade to PHP 7.4 container instead of latest PHP-FPM container
 - `lamp-fpm`: Switch back to your latest PHP-FPM container
-- `lamp-mysql 10.1`: Downgrade to MariaDB 10.1 instead
+- `lamp-mariadb 10.1`: Downgrade to MariaDB 10.1 instead
 - `lamp stop`: Stop your containers
 - `lamp rm -f`: Remove your containers
 
 ## MySQL
 
-To play with `mysql` from CLI you can add theses aliases:
+To play with `mariadb` from CLI you can add theses aliases:
 
 ```sh
-alias mysql-cli="docker exec -it lamp_db mysql -uroot -proot"
-alias mysql="docker exec -i lamp_db mysql"
-alias mysqldump="docker exec -i lamp_db mysqldump"
+alias mysql="lamp exec mariadb mariadb -proot"
+alias mysqlimport="lamp exec -T mariadb mariadb -proot"
+# Need mariadb-server-utils
+alias mysqldump="docker exec -i lamp_db mariadb-dump"
 ```
 
 ## PHP
@@ -48,17 +49,27 @@ To use PHP CLI you can add a function like this one:
 
 ```sh
 php() {
-    DEVELOPMENT_PATH="/Users/foo/Development"
-    ABSOLUTE_PATH=$(pwd)
-    RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH/}"
-    # since we're working inside the lamp network
-    # we should stick to the php container working path (/app)
-    DOCKER_CURRENT_PATH="/app$RELATIVE_PATH"
-    docker run -it --rm \
-        -v "$PWD":$DOCKER_CURRENT_PATH \
-        -w $DOCKER_CURRENT_PATH \
+    cpath="/app/${$(pwd)//$XDG_DEVELOP_DIR/}"
+
+    # NOTE: add custom port in case we want to use the build-in php webserver feature
+    # available in many php framework. (-p 8080:8080)
+    # php bin/console server:run 0.0.0.0:8080
+    # --add-host domain.test:172.17.0.5 \
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        -v "$PWD":$cpath \
+        -w $cpath \
+        -u `id -u`:`id -g` \
+        --env COMPOSER_HOME=$cpath/.composer \
+        --env COMPOSER_CACHE_DIR=$cpath/.composer/cache \
+        -v /etc/passwd:/etc/passwd:ro \
+        -v /etc/group:/etc/group:ro \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.0 ${@:1}
+        soifou/php-alpine:cli-${PHP_VERSION:-8.3}-wkhtmltopdf php ${@:1}
 }
 ```
 
@@ -97,16 +108,5 @@ wp() {
         -u $(id -u):$(id -g) \
         --net=lamp-network \
         soifou/wpcli-alpine ${@:1}
-}
-```
-
-## PHPUnit
-
-```sh
-phpunit() {
-    docker run --rm -it \
-        -v $(pwd):/app \
-        --net=$DOCKER_NETWORK_NAME \
-        phpunit/phpunit:latest ${@:1}
 }
 ```
